@@ -5,6 +5,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="${attr}"/>
+<div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Количество</th>
+            <th>Необходимость</th>
+        </tr>
+        </thead>
+        <tr th:class="TableHeader" th:each="part : ${parts}">
+            <td data-label="Part name" th:text="${part.name}">Name</td>
+            <td data-label="Amount" th:text="${part.getAmount()}">Amount</td>
+            <td data-label="Necessary" th:text="${part.getNecessary()} ? 'Да' : 'Нет'"></td>
+        </tr>
+    </table>
+
+    <form th:method="POST">
+        <input type="text" name="name" placeholder="Наименование">
+        <input type="number" pattern="[0-9]*" name="amount" placeholder="Количество">
+        <input type="checkbox" id="isnecessary" name="isnecessary" checked>
+        <label for="isnecessary">Необходимо для сборки</label>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <form th:method="POST" action="filter">
+        <input type="text" name="filter">
+        <button type="submit">Найти</button>
+    </form>
+
+</div>
 </body>
 </html>
