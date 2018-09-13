@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,7 +36,15 @@ public class MainController
     @PostMapping("filter")
     public String filter(@RequestParam String filter,Model model)
     {
-        model.addAttribute("parts",partRepository.findByName(filter));
+        List<Part> result = new ArrayList<>();
+        for(Part p : partRepository.findAll())
+        {
+            if(p.getName().toLowerCase().contains(filter.toLowerCase()))
+            {
+                result.add(p);
+            }
+        }
+        model.addAttribute("parts",result);
         return "index";
     }
 
