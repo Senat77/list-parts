@@ -14,7 +14,7 @@ public class Part
 
     private String name;            // Наименование комплектующего
 
-    private Boolean isNecessary;    // Признак "необходимости"
+    private Boolean necessary;    // Признак "необходимости"
 
     private Long amount;         // Кол-во на складе
 
@@ -23,10 +23,10 @@ public class Part
         //this(null,null,null);
     }
 
-    public Part(String name, Boolean isNecessary, Long amount)
+    public Part(String name, Boolean necessary, Long amount)
     {
         this.name = name;
-        this.isNecessary = isNecessary;
+        this.necessary = necessary;
         this.amount = amount;
     }
 
@@ -52,12 +52,12 @@ public class Part
 
     public Boolean getNecessary()
     {
-        return isNecessary;
+        return necessary;
     }
 
     public void setNecessary(Boolean necessary)
     {
-        isNecessary = necessary;
+        this.necessary = necessary;
     }
 
     public Long getAmount()
@@ -76,7 +76,7 @@ public class Part
         return "Part{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", isNecessary=" + isNecessary +
+                ", isNecessary=" + necessary +
                 ", amount=" + amount +
                 '}';
     }

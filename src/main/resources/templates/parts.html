@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="parts/common :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="parts/common :: header"></th:block> /*/-->
+<div class="container">
+    
+    <div class="panel panel-default">
+        
+        <div class="panel-heading">
+            <h1 class="panel-title text-uppercase">
+                <span class="pHeader"></span> Комплектующие
+                <a th:href="${'/part'}" class="btn btn-primary btn-xs pull-right" style="color: white">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+                </a>
+            </h1>
+        </div>
+        
+        <div class="panel-body">
+            
+            <!-- Part table -->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Количество</th>
+                    <th>Необходимость</th>
+                </tr>
+                </thead>
+                <tr
+                        th:class="anyClass"
+                        th:each="part : ${parts}" th:onclick="|window.open('${'/part/' + part.id}', '_self')|"
+                >
+                    <td data-label="Part name" th:text="${part.name}">Наименование</td>
+                    <td data-label="Part amount" th:text="${part.amount}">Количество</td>
+                    <td data-label="Necessary" th:text="${part.necessary} ? 'Да' : 'Нет'"></td>
+                </tr>
+            </table>
+    
+            <!-- Pagination-->
+            <nav>
+                <ul class="pagination pagination-sm">
+                    <li th:each="i : ${#numbers.sequence(0, (totalPages > 0) ? totalPages-1 : 0)}"
+                        th:class="${(current == i)}? 'active'" th:classappend="${totalPages lt 2}? 'hidden'">
+                        
+                        <a th:href="(${query} != null) ? @{/(page=${i}, q=${query})} : @{/(page=${i})}">
+                            <span th:text="${i}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Filter -->
+        <div class="panel-footer">
+            <form action="/" method="get">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            
+                            <span class="input-group-addon" id="sizing-addon3">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input th:value="${query}" id="query" name="q" type="text" class="form-control" aria-describedby="sizing-addon3"
+                                   placeholder="Введите строку поиска и нажмите 'Enter'"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-primary btn-sm">Поиск (Enter)</button>
+                        <a href="/" class="btn btn-default btn-sm">Отмена (Esc)</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+    </div>
+
+</div>
+<!--/*/ <th:block th:include="parts/common :: footer"></th:block> /*/-->
+</body>
+</html>

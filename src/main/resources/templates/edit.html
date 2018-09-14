@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="parts/common :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="parts/common :: header"></th:block> /*/-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            
+            <!-- Edit form -->
+            <form id="edit" th:object="${part}" th:action="@{/part}" method="post">
+                
+                <div class="panel panel-primary">
+                    
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <span class="noGlypth" aria-hidden="true"></span> Деталь
+                        </h2>
+                    </div>
+                    
+                    <div class="panel-body">
+                        
+                        <input th:field="*{id}" class="form-control" type="hidden" id="id" name="id"/>
+                        
+                        <div class="row">
+                            <!-- Part name -->
+                            <div class="form-group col-sm-6">
+                                <label for="name">Наименование</label>
+                                <input th:field="*{name}" type="text" class="form-control" id="name" name="name"
+                                       placeholder="Наименование"/>
+                            </div>
+                            
+                            <!-- Part amount -->
+                            <div class="form-group col-sm-6">
+                                <label for="amount">Количество</label>
+                                <input th:field="*{amount}" type="text" class="form-control" id="amount" name="amount"
+                                       placeholder="Количество"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <!-- Part necessary -->
+                            <div class="form-group col-sm-6">
+                                <label for="necessary">Необходимость</label>
+                                <select th:field="*{necessary}" class="form-control" id="necessary" name="necessary">
+                                    <option th:value="true">Да</option>
+                                    <option th:value="false">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="btn-toolbar">
+                                <span class="btn-toolbar pull-right" role="toolbar">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Сохранить
+                                    </button>
+                                    <a class="btn btn-default" th:classappend="${part.id == null} ? 'hidden'"
+                                       th:href="${'/part/delete/' + part.id}">
+                                       <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>  Удалить
+                                    </a>
+                                    <button type="reset" class="btn btn-default" onclick="window.open('/','_self')">
+                                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>  Отмена
+                                    </button>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                
+                </div>
+            
+            </form>
+        
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="parts/common :: footer"></th:block> /*/-->
+</body>
+</html>

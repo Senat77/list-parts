@@ -1,57 +1,86 @@
 package com.nodomain.listparts;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @Controller
 public class MainController
 {
+    private final PartRepository partRepository;
+
+    private static final int RECORDS_BY_PAGE = 10;
+    private static final String SORT = "name";
+
     @Autowired
-    private PartRepository partRepository;
 
-    @GetMapping
-    public String getAllParts(Model model)
+    public MainController(PartRepository partRepository)
     {
-        model.addAttribute("parts",partRepository.findAll());
-        return "index";
+        this.partRepository = partRepository;
     }
 
-    @PostMapping
-    public String add(@RequestParam String name,@RequestParam Long amount,@RequestParam Boolean isnecessary,Model model)
+    @GetMapping("/")
+    public String users
+    (
+       @RequestParam(value = "q", required = false) String query,
+       Model model,
+       @PageableDefault(size = RECORDS_BY_PAGE, sort = SORT, direction = ASC) Pageable pageable
+    )
     {
-        Part part = new Part(name,isnecessary,amount);
+        Page<Part> parts = partRepository.findByName((query != null) ? query : "", pageable);
+        model.addAttribute("parts", parts);
+        model.addAttribute("query", query);
+
+        model.addAttribute("totalPages", parts.getTotalPages());
+        model.addAttribute("current", pageable.getPageNumber());
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+
+        return "parts";
+    }
+
+    @GetMapping("/part/{id}")
+    public String edit(@PathVariable Long id, Model model)
+    {
+        model.addAttribute("part", partRepository.getOne(id));
+        return "edit";
+    }
+
+    @PostMapping("/part")
+    public String save(@ModelAttribute Part part)
+    {
         partRepository.save(part);
-        model.addAttribute("parts",partRepository.findAll());
-        return "index";
-    }
-
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter,Model model)
-    {
-        List<Part> result = new ArrayList<>();
-        for(Part p : partRepository.findAll())
+        try
         {
-            if(p.getName().toLowerCase().contains(filter.toLowerCase()))
-            {
-                result.add(p);
-            }
+            return "redirect:/?q=" + URLEncoder.encode(part.getName(), "UTF8");
         }
-        model.addAttribute("parts",result);
-        return "index";
+        catch (UnsupportedEncodingException ignore)
+        {
+            return "redirect:/";
+        }
     }
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model)
+    @GetMapping("/part/delete/{id}")
+    public String delete(@PathVariable Long id)
     {
-        model.addAttribute("name", name);
-        return "greeting";
+        partRepository.deleteById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/part")
+    public String create(Model model)
+    {
+        Part part = new Part();
+        model.addAttribute("part", part);
+        return "edit";
     }
 }
