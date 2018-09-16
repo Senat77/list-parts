@@ -11,6 +11,12 @@ public interface PartRepository extends JpaRepository<Part,Long>
 {
     List<Part> findByNameContainingIgnoreCase(String name);
 
-    @Query("select p from Part p where lower(p.name) like concat('%', lower(?1), '%')")
-    Page<Part> findByName(String search, Pageable pageable);
+    @Query(
+           "select p from Part p " +
+           "where lower(p.name) like concat('%', lower(?1), '%') and " +
+           "((?2 is null) or (p.necessary = ?2))"
+          )
+    Page<Part> findByName(String search, Boolean necessary, Pageable pageable);
+
+    List<Part> findAllNecessary();
 }

@@ -19,7 +19,35 @@
         </div>
         
         <div class="panel-body">
-            
+
+            <!-- Filter for Part.isNecessary -->
+            <div>
+                <form action="/" method="get">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="input-group input-group-sm">
+
+                            <span class="input-group-addon" id="sizing-addon4">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                                <select th:name="necessary" th:id="necessary"
+                                        th:selected="Необязательные"
+                                        class="form-control"
+                                        aria-describedby="sizing-addon4">
+                                    <option th:value="null" th:selected="${necessary} == null ? true : false">Все</option>
+                                    <option th:value="true" th:selected="${necessary}">Необходимые</option>
+                                    <option th:value="false" th:selected="${necessary} == false">Необязательные</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="submit" class="btn btn-primary btn-sm">Применить</button>
+                            <a href="/" class="btn btn-default btn-sm">Отмена</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <!-- Part table -->
             <table class="table table-hover">
                 <thead>
@@ -52,8 +80,14 @@
                 </ul>
             </nav>
         </div>
-        
-        <!-- Filter -->
+
+        <div align="center">
+            <div> </div>
+            <span th:utext="'<b>Кол-во ПК , готовых к сборке : ' + ${pccount} + '</b>'" align="center"></span>
+            <div> </div>
+        </div>
+
+        <!-- Search -->
         <div class="panel-footer">
             <form action="/" method="get">
                 <div class="row">

@@ -3,6 +3,7 @@ package com.nodomain.listparts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
@@ -29,16 +31,19 @@ public class MainController
     }
 
     @GetMapping("/")
-    public String users
+    public String parts
     (
        @RequestParam(value = "q", required = false) String query,
+       @RequestParam(value = "necessary", required = false) Boolean necessary,
        Model model,
        @PageableDefault(size = RECORDS_BY_PAGE, sort = SORT, direction = ASC) Pageable pageable
     )
     {
-        Page<Part> parts = partRepository.findByName((query != null) ? query : "", pageable);
+        Page<Part> parts = partRepository.findByName((query != null) ? query : "", necessary, pageable);
         model.addAttribute("parts", parts);
         model.addAttribute("query", query);
+        model.addAttribute("necessary",necessary);
+        model.addAttribute("pccount",computersAmount());
 
         model.addAttribute("totalPages", parts.getTotalPages());
         model.addAttribute("current", pageable.getPageNumber());
@@ -82,5 +87,16 @@ public class MainController
         Part part = new Part();
         model.addAttribute("part", part);
         return "edit";
+    }
+
+    private Long computersAmount()
+    {
+        //System.out.println(partRepository.findAllNecessary());
+        List<Part> list = partRepository.findAllNecessary();
+        Long pccount = 0L;
+        if(!list.isEmpty())
+            pccount = list.get(0).getAmount();
+        //System.out.println("PC COUNT = " + pccount);
+        return pccount;
     }
 }

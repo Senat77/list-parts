@@ -36,7 +36,7 @@
                             <!-- Part amount -->
                             <div class="form-group col-sm-6">
                                 <label for="amount">Количество</label>
-                                <input th:field="*{amount}" type="text" class="form-control" id="amount" name="amount"
+                                <input th:field="*{amount}" type="text" pattern="[0-9]*" class="form-control" id="amount" name="amount"
                                        placeholder="Количество"/>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
                     
                     </div>
-                    
+
                     <ul class="list-group">
                         <li class="list-group-item">
                             <div class="btn-toolbar">

@@ -7,10 +7,6 @@ tr.disabled {
     color: gainsboro;
 }
 
-tr.ROLE_ADMIN {
-    color: brown;
-}
-
 .table-hover>tbody>tr:hover {
     cursor: pointer;
 }

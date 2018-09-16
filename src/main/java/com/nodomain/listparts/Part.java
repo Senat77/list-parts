@@ -1,11 +1,16 @@
 package com.nodomain.listparts;
 
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+
+@NamedQuery(name = "Part.findAllNecessary", query="select p from Part p where p.necessary=TRUE order by p.amount")
+
 public class Part
 {
     @Id
