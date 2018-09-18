@@ -4,25 +4,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
-
-import java.util.Arrays;
 
 @SpringBootApplication
-public class Application
-{
-    public static void main(String[] args)
-    {
+public class Application {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
 
     @Bean
-    public CommandLineRunner demo(PartRepository repository)
-    {
+    public CommandLineRunner demo(PartRepository repository) {
         return (args) ->
         {
-            /* Только для первичного тестового заполнения под H2, инициализация MySQL - средствами Спринга (*.sql)
+            /*
             repository.saveAll(Arrays.asList(
                     new Part("Материнская плата", true, 3L),
                     new Part("Процессор", true, 4L),

@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface PartRepository extends JpaRepository<Part,Long>
-{
+public interface PartRepository extends JpaRepository<Part, Long> {
     @Query(
-           "select p from Part p " +
-           "where lower(p.name) like concat('%', lower(?1), '%') and " +
-           "((?2 is null) or (p.necessary = ?2))"
-          )
+            "select p from Part p " +
+                    "where lower(p.name) like concat('%', lower(?1), '%') and " +
+                    "((?2 is null) or (p.necessary = ?2))"
+    )
     Page<Part> findByName(String search, Boolean necessary, Pageable pageable);
 
-    List<Part> findAllNecessary();
+    @Query
+    Part findFirstByNecessaryIsTrueOrderByAmount();
 }
