@@ -3,7 +3,6 @@ package com.nodomain.listparts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +29,7 @@ public class MainController
         this.partRepository = partRepository;
     }
 
+    // "Корень"
     @GetMapping("/")
     public String parts
     (
@@ -40,11 +40,12 @@ public class MainController
     )
     {
         Page<Part> parts = partRepository.findByName((query != null) ? query : "", necessary, pageable);
-        model.addAttribute("parts", parts);
-        model.addAttribute("query", query);
-        model.addAttribute("necessary",necessary);
-        model.addAttribute("pccount",computersAmount());
+        model.addAttribute("parts", parts);                 // Комплектующие
+        model.addAttribute("query", query);                 // Запрос
+        model.addAttribute("necessary",necessary);          // Признак 'необходимости'
+        model.addAttribute("pccount",computersAmount());    // Кол-во ПК к сборке
 
+        // Пейджинг
         model.addAttribute("totalPages", parts.getTotalPages());
         model.addAttribute("current", pageable.getPageNumber());
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
@@ -53,6 +54,7 @@ public class MainController
         return "parts";
     }
 
+    // 'Детализация' по комплектующему
     @GetMapping("/part/{id}")
     public String edit(@PathVariable Long id, Model model)
     {
@@ -89,14 +91,13 @@ public class MainController
         return "edit";
     }
 
+    // Подсчет ПК, готовых к сборке (min по выборке)
     private Long computersAmount()
     {
-        //System.out.println(partRepository.findAllNecessary());
         List<Part> list = partRepository.findAllNecessary();
         Long pccount = 0L;
         if(!list.isEmpty())
             pccount = list.get(0).getAmount();
-        //System.out.println("PC COUNT = " + pccount);
         return pccount;
     }
 }

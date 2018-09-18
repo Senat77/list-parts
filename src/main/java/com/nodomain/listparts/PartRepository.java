@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface PartRepository extends JpaRepository<Part,Long>
 {
-    List<Part> findByNameContainingIgnoreCase(String name);
-
     @Query(
            "select p from Part p " +
            "where lower(p.name) like concat('%', lower(?1), '%') and " +

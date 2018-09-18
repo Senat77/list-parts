@@ -9,23 +9,24 @@ import javax.persistence.Id;
 
 @Entity
 
+// Выборка для подсчета ПК, готовых к сборке
 @NamedQuery(name = "Part.findAllNecessary", query="select p from Part p where p.necessary=TRUE order by p.amount")
 
 public class Part
 {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;             // ИН, автогенерация
+    private Long id;                // ИН, автогенерация
 
-    private String name;            // Наименование комплектующего
+    private String name;            // Наименование
 
-    private Boolean necessary;    // Признак "необходимости"
+    private Boolean necessary;      // Признак "необходимости"
 
-    private Long amount;         // Кол-во на складе
+    private Long amount;            // Кол-во на складе
 
     protected Part()
     {
-        //this(null,null,null);
+        // Ничего не делает, нужен для корректной отработки Spring'а
     }
 
     public Part(String name, Boolean necessary, Long amount)

@@ -70,10 +70,11 @@
             <!-- Pagination-->
             <nav>
                 <ul class="pagination pagination-sm">
-                    <li th:each="i : ${#numbers.sequence(0, (totalPages > 0) ? totalPages-1 : 0)}"
+                    <!-- <li th:each="i : ${#numbers.sequence(0, (totalPages > 0) ? totalPages-1 : 0)}" -->
+                    <li th:each="i : ${#numbers.sequence(0, (totalPages > 0) ? totalPages - 1 : 0)}"
                         th:class="${(current == i)}? 'active'" th:classappend="${totalPages lt 2}? 'hidden'">
                         
-                        <a th:href="(${query} != null) ? @{/(page=${i}, q=${query})} : @{/(page=${i})}">
+                        <a th:href="(${query} != null) ? @{/(page=${i}, q=${query}, necessary=${necessary})} : @{/(page=${i}, necessary=${necessary})}">
                             <span th:text="${i}"></span>
                         </a>
                     </li>

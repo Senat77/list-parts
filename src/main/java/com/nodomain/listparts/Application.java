@@ -20,23 +20,35 @@ public class Application
     {
         return (args) ->
         {
+            // Только для первичного заполнения, в дальнейшем - *.sql при инициализации БД MySQL
+            /*
             repository.saveAll(Arrays.asList(
-                    new Part("Motherboard INTEL B150 1", true, 3L),
-                    new Part("Motherboard INTEL B250 2", false, 4L),
-                    new Part("Motherboard INTEL B250 3", true, 5L),
-                    new Part("Motherboard INTEL B250 4", false, 6L),
-                    new Part("Motherboard INTEL B250 5", true, 7L),
-                    new Part("Motherboard INTEL B250 6", false, 8L),
-                    new Part("Motherboard INTEL B250 7", true, 9L),
-                    new Part("Motherboard INTEL B250 8", false, 33L),
-                    new Part("Motherboard INTEL B250 9", true, 31L),
-                    new Part("Motherboard INTEL B250 10", true, 32L),
-                    new Part("ПРОЦЕССОР , 2 CORE, 3200MHZ, LGA1151, L3 2MB, INTEL GRAPHICS HD 610", true, 2L),
-                    new Part("ВИДЕОКАРТА SVGA PCI EXPRESS, 2GB GDDR3, 64BIT, 800/5010MHZ, LP,VGA/DVI/HDMI", true, 5L),
-                    new Part("ПРИВОД ВНЕШНИЙ DVD-RW , USB 2.0, BLACK, SLIM, RETAIL", false, 4L),
-                    new Part("Карта звуковая PCI - 4CH (c-media 8738) Box (10715)", false, 12L)
+                    new Part("Материнская плата", true, 3L),
+                    new Part("Процессор", true, 4L),
+                    new Part("Видеокарта", true, 5L),
+                    new Part("Модуль памяти", true, 6L),
+                    new Part("Жесткий диск", true, 7L),
+                    new Part("SSD-накопитель", false, 8L),
+                    new Part("Оптический привод", false, 9L),
+                    new Part("Звуковая карта", false, 33L),
+                    new Part("Контроллер VGA to HDMI", false, 31L),
+                    new Part("Контроллер USB BlueTooth", false, 32L),
+                    new Part("Контроллер USB to COM cable", false, 2L),
+                    new Part("Корпус", true, 5L),
+                    new Part("Блок питания", true, 4L),
+                    new Part("Процессорный кулер", true, 12L),
+                    new Part("Кулер", false, 12L),
+                    new Part("Термопаста", false, 22L),
+                    new Part("Кулер для видеокарты", false, 3L),
+                    new Part("Wi-Fi роутер", false, 6L),
+                    new Part("Сканер", false, 12L),
+                    new Part("Сетевой адаптер", false, 17L),
+                    new Part("Модем", false, 26L),
+                    new Part("Кабель питания", true, 13L),
+                    new Part("Монитор", true, 9L),
+                    new Part("Принтер", true, 7L)
             ));
-
+            */
         };
     }
 }

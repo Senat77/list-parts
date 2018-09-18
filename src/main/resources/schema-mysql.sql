@@ -1,12 +1,13 @@
--- we don't know how to generate schema test (class Schema) :(
-create table if not exists hibernate_sequence
+drop table if exists hibernate_sequence;
+create table hibernate_sequence
 (
 	next_val bigint null
 )
-engine=MyISAM
+engine=InnoDB
 ;
 
-create table if not exists part
+drop table if exists part;
+create table part
 (
 	id bigint not null
 		primary key,
@@ -14,5 +15,6 @@ create table if not exists part
 	name varchar(255) null,
 	necessary bit null
 )
-engine=MyISAM
+engine=InnoDB
 ;
+
