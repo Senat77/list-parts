@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
@@ -15,13 +16,13 @@ public class Application
         SpringApplication.run(Application.class, args);
     }
 
+
     @Bean
     public CommandLineRunner demo(PartRepository repository)
     {
         return (args) ->
         {
-            // Только для первичного заполнения, в дальнейшем - *.sql при инициализации БД MySQL
-            /*
+            /* Только для первичного тестового заполнения под H2, инициализация MySQL - средствами Спринга (*.sql)
             repository.saveAll(Arrays.asList(
                     new Part("Материнская плата", true, 3L),
                     new Part("Процессор", true, 4L),
