@@ -1,26 +1,25 @@
-INSERT INTO test.hibernate_sequence (next_val) VALUES (25);
-
-INSERT INTO test.part (id, amount, name, necessary) VALUES (1, 3, 'Материнская плата', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (2, 4, 'Процессор', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (3, 5, 'Видеокарта', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (4, 6, 'Модуль памяти', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (5, 7, 'Жесткий диск', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (6, 8, 'SSD-накопитель', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (7, 9, 'Оптический привод', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (8, 33, 'Звуковая карта', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (9, 31, 'Контроллер VGA to HDMI', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (10, 32, 'Контроллер USB BlueTooth', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (11, 2, 'Контроллер USB to COM cable', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (12, 5, 'Корпус', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (13, 4, 'Блок питания', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (14, 3, 'Процессорный кулер', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (15, 12, 'Кулер', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (16, 22, 'Термопаста', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (17, 3, 'Кулер для видеокарты', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (18, 6, 'Wi-Fi роутер', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (19, 12, 'Сканер', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (20, 17, 'Сетевой адаптер', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (21, 26, 'Модем', false);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (22, 13, 'Кабель питания', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (23, 9, 'Монитор', true);
-INSERT INTO test.part (id, amount, name, necessary) VALUES (24, 7, 'Принтер', false);
+INSERT INTO parts (id, amount, name, necessary) VALUES
+  (1, 3, 'Материнская плата', true),
+  (2, 4, 'Процессор', true),
+  (3, 5, 'Видеокарта', true),
+  (4, 6, 'Модуль памяти', true),
+  (5, 7, 'Жесткий диск', true),
+  (6, 8, 'SSD-накопитель', false),
+  (7, 9, 'Оптический привод', false),
+  (8, 33, 'Звуковая карта', false),
+  (9, 31, 'Контроллер VGA to HDMI', false),
+  (10, 32, 'Контроллер USB BlueTooth', false),
+  (11, 2, 'Контроллер USB to COM cable', false),
+  (12, 5, 'Корпус', true),
+  (13, 4, 'Блок питания', true),
+  (14, 3, 'Процессорный кулер', true),
+  (15, 12, 'Кулер', false),
+  (16, 22, 'Термопаста', false),
+  (17, 3, 'Кулер для видеокарты', false),
+  (18, 6, 'Wi-Fi роутер', false),
+  (19, 12, 'Сканер', false),
+  (20, 17, 'Сетевой адаптер', false),
+  (21, 26, 'Модем', false),
+  (22, 13, 'Кабель питания', true),
+  (23, 9, 'Монитор', true),
+  (24, 7, 'Принтер', false);

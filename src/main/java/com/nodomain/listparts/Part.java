@@ -1,21 +1,19 @@
 package com.nodomain.listparts;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "parts")
 public class Part {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;                // ИН, автогенерация
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String name;            // Наименование
+    private String name;
 
-    private Boolean necessary;      // Признак "необходимости"
+    private Boolean necessary;
 
-    private Long amount;            // Кол-во на складе
+    private Long amount;
 
     protected Part() {
     }

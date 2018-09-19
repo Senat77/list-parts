@@ -15,6 +15,7 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @Controller
 public class MainController {
+
     private final PartRepository partRepository;
 
     private static final int RECORDS_BY_PAGE = 10;
@@ -27,18 +28,17 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String parts
-    (
+    public String parts (
             @RequestParam(value = "q", required = false) String query,
             @RequestParam(value = "necessary", required = false) Boolean necessary,
             Model model,
             @PageableDefault(size = RECORDS_BY_PAGE, sort = SORT, direction = ASC) Pageable pageable
     ) {
         Page<Part> parts = partRepository.findByName((query != null) ? query : "", necessary, pageable);
-        model.addAttribute("parts", parts);                 // Комплектующие
-        model.addAttribute("query", query);                 // Запрос
-        model.addAttribute("necessary", necessary);          // Признак 'необходимости'
-        model.addAttribute("pccount", computersAmount());    // Кол-во ПК к сборке
+        model.addAttribute("parts", parts);
+        model.addAttribute("query", query);
+        model.addAttribute("necessary", necessary);
+        model.addAttribute("pccount", computersAmount());
 
         model.addAttribute("totalPages", parts.getTotalPages());
         model.addAttribute("current", pageable.getPageNumber());
